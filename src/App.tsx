@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import SideMenu from './components/SideMenu';
+import Dashboard from './dashboard';
+import UploadDailyQuotes from './upload-daily-quotes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export default () => (
+  <BrowserRouter>
+    <SideMenu>
+      <SideMenu.Item to="/" label="Dashboard" />
+      <SideMenu.Item to="/upload-daily-quotes" label="Upload Daily Quotes" />
+    </SideMenu>
+    <Switch>
+      <Route exact path="/">
+        <Dashboard />
+      </Route>
+      <Route path="/upload-daily-quotes">
+        <UploadDailyQuotes />
+      </Route>
+    </Switch>
+  </BrowserRouter>
+);
