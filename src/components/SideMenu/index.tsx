@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Item from './Item';
 
 const Container = styled.div`
   background-color: var(--gray-dark);
@@ -12,10 +12,6 @@ const SideMenu = ({ children }: { children: ReactNode }) => (
   </Container>
 );
 
-SideMenu.Item = ({ to, label }: { to: string, label: string }) => (
-  <div>
-    <Link to={to}>{label}</Link>
-  </div>
-);
+SideMenu.Item = Item;
 
 export default SideMenu;
