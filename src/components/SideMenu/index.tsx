@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import Item from './Item';
 
 const Container = styled.div`
-  background-color: var(--gray-dark);
+  border-right: 1px solid var(--gray);
+  height: 100%;
+  padding: 5px;
+  position: fixed;
 `;
 
 const SideMenu = ({ children }: { children: ReactNode }) => (

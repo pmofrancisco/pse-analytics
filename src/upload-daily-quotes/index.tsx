@@ -1,4 +1,9 @@
 import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  padding: 10px 70px;
+`;
 
 interface IDailyQuote {
   StockCode: string;
@@ -33,7 +38,7 @@ export default () => {
     setDailyQuotes(quotes);
   };
   return (
-    <div>
+    <Container>
       <div>Upload Daily Quotes</div>
       <input
         ref={fileEl}
@@ -72,6 +77,6 @@ export default () => {
           </tbody>
         </table>
       )}
-    </div>
+    </Container>
   );
 };
