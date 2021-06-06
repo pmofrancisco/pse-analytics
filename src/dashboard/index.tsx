@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import { PageContent, PageTitle } from '../components/Page';
 
-const Container = styled.div`
-  padding: 10px 70px;
-`;
-
-export default () => (<Container>Dashboard</Container>);
+export default () => (
+  <PageContent>
+    <PageTitle>DASHBOARD</PageTitle>
+  </PageContent>
+);

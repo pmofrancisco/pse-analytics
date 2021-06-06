@@ -1,20 +1,12 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { IDailyQuote } from '../api-client/daily-quotes-client';
+import { PageContent, PageTitle } from '../components/Page';
+import Grid from '../components/Grid';
 
-const Container = styled.div`
-  padding: 10px 70px;
+const InputFileContainer = styled.div`
+  margin-bottom: 10px;
 `;
-
-interface IDailyQuote {
-  StockCode: string;
-  QuoteDate: Date;
-  OpenPrice: number;
-  HighPrice: number;
-  LowPrice: number;
-  ClosePrice: number;
-  Volume: number;
-  Value: number;
-};
 
 export default () => {
   const fileEl = useRef(null);
@@ -38,45 +30,43 @@ export default () => {
     setDailyQuotes(quotes);
   };
   return (
-    <Container>
-      <div>Upload Daily Quotes</div>
-      <input
-        ref={fileEl}
-        type="file"
-        onChange={() => reader.readAsText(fileEl?.current?.files[0])}
-      />
+    <PageContent>
+      <PageTitle>UPLOAD DAILY QUOTES</PageTitle>
+      <InputFileContainer>
+        <input
+          ref={fileEl}
+          type="file"
+          onChange={() => reader.readAsText(fileEl?.current?.files[0])}
+        />
+      </InputFileContainer>
       {dailyQuotes.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <td>Code</td>
-              <td>Date</td>
-              <td>Open</td>
-              <td>High</td>
-              <td>Low</td>
-              <td>Close</td>
-              <td>Volume</td>
-              <td>Value</td>
-            </tr>
-          </thead>
-          <tbody>
-            {dailyQuotes.map(({
-              StockCode, QuoteDate, OpenPrice, HighPrice, LowPrice, ClosePrice, Volume, Value,
-            }) => (
-              <tr key={StockCode}>
-                <td>{StockCode}</td>
-                <td>{QuoteDate.toLocaleDateString()}</td>
-                <td>{OpenPrice.toString()}</td>
-                <td>{HighPrice.toString()}</td>
-                <td>{LowPrice.toString()}</td>
-                <td>{ClosePrice.toString()}</td>
-                <td>{Volume.toString()}</td>
-                <td>{Value.toString()}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Grid>
+          <Grid.Header>
+            <Grid.HeaderItem>CODE</Grid.HeaderItem>
+            <Grid.HeaderItem>DATE</Grid.HeaderItem>
+            <Grid.HeaderItem>OPEN</Grid.HeaderItem>
+            <Grid.HeaderItem>HIGH</Grid.HeaderItem>
+            <Grid.HeaderItem>LOW</Grid.HeaderItem>
+            <Grid.HeaderItem>CLOSE</Grid.HeaderItem>
+            <Grid.HeaderItem>VOLUME</Grid.HeaderItem>
+            <Grid.HeaderItem>VALUE</Grid.HeaderItem>
+          </Grid.Header>
+          {dailyQuotes.map(({
+            StockCode, QuoteDate, OpenPrice, HighPrice, LowPrice, ClosePrice, Volume, Value,
+          }) => (
+            <Grid.Row key={StockCode}>
+              <Grid.Cell>{StockCode}</Grid.Cell>
+              <Grid.Cell>{QuoteDate.toLocaleDateString()}</Grid.Cell>
+              <Grid.Cell>{OpenPrice.toString()}</Grid.Cell>
+              <Grid.Cell>{HighPrice.toString()}</Grid.Cell>
+              <Grid.Cell>{LowPrice.toString()}</Grid.Cell>
+              <Grid.Cell>{ClosePrice.toString()}</Grid.Cell>
+              <Grid.Cell>{Volume.toString()}</Grid.Cell>
+              <Grid.Cell>{Value.toString()}</Grid.Cell>
+            </Grid.Row>
+          ))}
+        </Grid>
       )}
-    </Container>
+    </PageContent>
   );
 };
