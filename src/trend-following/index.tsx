@@ -11,8 +11,7 @@ export default () => {
   return (
     <PageContent>
       <PageTitle>TREND FOLLOWING</PageTitle>
-      {state === 'hasValue' && (<Trends trends={contents as ITrend[]} />)}
-      {state === 'loading' && (<div>Loading...</div>)}
+      <Trends state={state} trends={contents as ITrend[]} />
     </PageContent>
   );
 };

@@ -1,7 +1,9 @@
 import React, { ReactNode, ReactNodeArray } from 'react';
 import styled from 'styled-components';
+import { LoadableState } from '../../types';
 import { Cell } from './Cell';
 import { Header, HeaderItem } from './Header';
+import LoadingIndicator from './LoadingIndicator';
 import Row from './Row';
 
 const Container = styled.div`
@@ -23,6 +25,7 @@ const Grid = ({ children }: GridProps) => (
 Grid.Cell = Cell;
 Grid.Header = Header;
 Grid.HeaderItem = HeaderItem;
+Grid.LoadingIndicator = LoadingIndicator;
 Grid.Row = Row;
 
 export default Grid;
