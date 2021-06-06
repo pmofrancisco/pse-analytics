@@ -1,7 +1,8 @@
 import React from 'react';
 import { useRecoilValueLoadable } from 'recoil';
+import GenericGrid from '../components/GenericGrid';
 import { PageContent, PageTitle } from '../components/Page';
-import Trends from './components/Trends';
+import columns from './columns';
 import { ITrend } from './interfaces';
 import { trendsState } from './selectors';
 
@@ -11,7 +12,7 @@ export default () => {
   return (
     <PageContent>
       <PageTitle>TREND FOLLOWING</PageTitle>
-      <Trends state={state} trends={contents as ITrend[]} />
+      <GenericGrid columns={columns} records={contents as ITrend[]} state={state} />
     </PageContent>
   );
 };
