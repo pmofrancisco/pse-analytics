@@ -16,6 +16,21 @@ const columns: IColumn[] = [
     text: 'SMA 100',
     type: 'text',
   },
+  {
+    path: ['ClosePrice'],
+    text: 'Close Price',
+    type: 'text',
+  },
+  {
+    path: ['ClosePrice50Day'],
+    text: 'Close Price 50',
+    type: 'text',
+  },
+  {
+    path: ['BuySignal'],
+    text: 'Buy Signal',
+    type: 'text',
+  },
 ];
 
 export default columns;

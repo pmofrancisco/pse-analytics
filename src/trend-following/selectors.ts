@@ -11,9 +11,14 @@ export const trendsState = selector<ITrend[]>({
     const stockCodes = R.uniq(dailyQuotes.map(({ StockCode }) => StockCode));
     const trends = stockCodes.map((StockCode) => {
       const dailyQuotesByStockCode = R.filter(R.propEq('StockCode', StockCode), dailyQuotes);
-      const { value: SMA50 } = sma(R.slice(0, 50, dailyQuotesByStockCode.map(({ ClosePrice }) => ClosePrice)));
-      const { value: SMA100 } = sma(R.slice(0, 100, dailyQuotesByStockCode.map(({ ClosePrice }) => ClosePrice)));
-      return { StockCode, SMA50, SMA100 } as ITrend;
+      const prices = dailyQuotesByStockCode.map(({ ClosePrice }) => ClosePrice);
+      const [latestDailyQuote] = dailyQuotesByStockCode;
+      const { ClosePrice } = latestDailyQuote;
+      const ClosePrice50Day = R.apply(Math.max, prices);
+      const { value: SMA50 } = sma(R.slice(0, 50, prices));
+      const { value: SMA100 } = sma(R.slice(0, 100, prices));
+      const BuySignal = ClosePrice >= ClosePrice50Day ? 'Yes' : 'No';
+      return { BuySignal, ClosePrice, ClosePrice50Day, StockCode, SMA50, SMA100 } as ITrend;
     });
     return R.filter(({ SMA50, SMA100 }) => SMA50 > SMA100, trends);
   },
