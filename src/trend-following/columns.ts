@@ -18,17 +18,17 @@ const columns: IColumn[] = [
   },
   {
     path: ['ClosePrice'],
-    text: 'Close Price',
+    text: 'CLOSE PRICE',
     type: 'text',
   },
   {
     path: ['ClosePrice50Day'],
-    text: 'Close Price 50',
+    text: 'CLOSE PRICE 50',
     type: 'text',
   },
   {
     path: ['BuySignal'],
-    text: 'Buy Signal',
+    text: 'BUY SIGNAL',
     type: 'text',
   },
 ];

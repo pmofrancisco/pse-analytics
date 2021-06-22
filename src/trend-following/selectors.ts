@@ -9,17 +9,24 @@ export const trendsState = selector<ITrend[]>({
   get: async ({ get }) => {
     const dailyQuotes = await get(dailyQuotesState);
     const stockCodes = R.uniq(dailyQuotes.map(({ StockCode }) => StockCode));
-    const trends = stockCodes.map((StockCode) => {
+    const stocksWithSmas = stockCodes.map((StockCode) => {
       const dailyQuotesByStockCode = R.filter(R.propEq('StockCode', StockCode), dailyQuotes);
       const prices = dailyQuotesByStockCode.map(({ ClosePrice }) => ClosePrice);
+      if (StockCode === 'CPG') {
+        console.log('CPG', prices);
+      }
       const [latestDailyQuote] = dailyQuotesByStockCode;
       const { ClosePrice } = latestDailyQuote;
-      const ClosePrice50Day = R.apply(Math.max, prices);
+      const ClosePrice50Day = R.apply(Math.max, R.slice(0, 50, prices));
       const { value: SMA50 } = sma(R.slice(0, 50, prices));
       const { value: SMA100 } = sma(R.slice(0, 100, prices));
       const BuySignal = ClosePrice >= ClosePrice50Day ? 'Yes' : 'No';
       return { BuySignal, ClosePrice, ClosePrice50Day, StockCode, SMA50, SMA100 } as ITrend;
     });
-    return R.filter(({ SMA50, SMA100 }) => SMA50 > SMA100, trends);
+    const trends = R.filter(({ SMA50, SMA100 }) => SMA50 > SMA100, stocksWithSmas);
+    return R.concat(
+      R.filter(R.propEq('BuySignal', 'Yes'), trends),
+      R.filter(R.propEq('BuySignal', 'No'), trends),
+    );
   },
 });
