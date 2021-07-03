@@ -12,9 +12,6 @@ export const trendsState = selector<ITrend[]>({
     const stocksWithSmas = stockCodes.map((StockCode) => {
       const dailyQuotesByStockCode = R.filter(R.propEq('StockCode', StockCode), dailyQuotes);
       const prices = dailyQuotesByStockCode.map(({ ClosePrice }) => ClosePrice);
-      if (StockCode === 'CPG') {
-        console.log('CPG', prices);
-      }
       const [latestDailyQuote] = dailyQuotesByStockCode;
       const { ClosePrice } = latestDailyQuote;
       const ClosePrice50Day = R.apply(Math.max, R.slice(0, 50, prices));

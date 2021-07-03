@@ -4,6 +4,7 @@ import { faChartBar, faHome, faUpload } from '@fortawesome/free-solid-svg-icons'
 import SideMenu from './components/SideMenu';
 import Dashboard from './dashboard';
 import TrendFollowing from './trend-following';
+import TrendFollowingDbLogic from './trend-following-db-logic';
 import UploadDailyQuotes from './upload-daily-quotes';
 
 export default () => (
@@ -12,6 +13,7 @@ export default () => (
       <SideMenu.Item to="/" icon={faHome} />
       <SideMenu.Item to="/upload-daily-quotes" icon={faUpload} />
       <SideMenu.Item to="/trend-following" icon={faChartBar} />
+      <SideMenu.Item to="/trend-following-db-logic" icon={faChartBar} />
     </SideMenu>
     <Switch>
       <Route exact path="/">
@@ -19,6 +21,9 @@ export default () => (
       </Route>
       <Route path="/trend-following">
         <TrendFollowing />
+      </Route>
+      <Route path="/trend-following-db-logic">
+        <TrendFollowingDbLogic />
       </Route>
       <Route path="/upload-daily-quotes">
         <UploadDailyQuotes />

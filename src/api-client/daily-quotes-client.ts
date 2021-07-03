@@ -13,4 +13,4 @@ export interface IDailyQuote extends IStockCode {
 
 export class DailyQuotesClient extends BaseApiClient {
   get = async () => await getRequest<IDailyQuote[]>(this._root);
-}
+};

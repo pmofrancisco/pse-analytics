@@ -15,12 +15,12 @@ const GenericGrid = <RecordType extends IStockCode>({ columns, records, state = 
   <Grid>
     <Grid.Header>
       {columns.map(({ text }) => (
-        <Grid.HeaderItem>{text}</Grid.HeaderItem>
+        <Grid.HeaderItem key={text}>{text}</Grid.HeaderItem>
       ))}
     </Grid.Header>
     {state === 'hasValue' && records.map((record) => {
       const { StockCode } = record;
-      return (<Item columns={columns} record={record} />)
+      return (<Item key={StockCode} columns={columns} record={record} />)
     })}
     {state === 'loading' && (<Grid.LoadingIndicator />)}
   </Grid>
