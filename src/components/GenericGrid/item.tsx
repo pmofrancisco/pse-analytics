@@ -11,9 +11,16 @@ type ItemProps<RecordType extends IStockCode> = {
 
 const Item = <RecordType extends IStockCode>({ columns, record }: ItemProps<RecordType>) => (
   <Grid.Row>
-    {columns.map(({ path }, index) => (
-      <Grid.Cell key={`${record.StockCode}-${index}`}>{R.path(path, record)}</Grid.Cell>
-    ))}
+    {columns.map((column, index) => {
+      const { path } = column;
+      return (
+        <Grid.Cell
+          key={`${record.StockCode}-${index}`}
+          column={column}
+          value={R.path(path, record) as number | string}
+        />
+      );
+    })}
   </Grid.Row>
 );
 

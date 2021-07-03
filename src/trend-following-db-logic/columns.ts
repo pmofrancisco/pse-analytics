@@ -1,4 +1,4 @@
-import { IColumn } from '../components/GenericGrid/IColumn';
+import { IColumn, INumberColumn } from '../components/GenericGrid/IColumn';
 
 const columns: IColumn[] = [
   {
@@ -9,33 +9,34 @@ const columns: IColumn[] = [
   {
     path: ['SMA50'],
     text: 'SMA 50',
-    type: 'text',
+    type: 'number',
   },
   {
     path: ['SMA100'],
     text: 'SMA 100',
-    type: 'text',
+    type: 'number',
   },
   {
     path: ['ClosePrice'],
     text: 'CLOSE PRICE',
-    type: 'text',
+    type: 'number',
   },
   {
     path: ['HighestClosePrice50'],
     text: 'CLOSE PRICE 50',
-    type: 'text',
+    type: 'number',
   },
   {
     path: ['ClosePriceDiff'],
     text: 'CLOSE PRICE DIFF',
-    type: 'text',
+    type: 'percent',
   },
   {
+    decimalPlaces: 2,
     path: ['AverageValue50'],
     text: 'AVERAGE VALUE 50',
-    type: 'text',
-  },
+    type: 'number',
+  } as INumberColumn,
 ];
 
 export default columns;

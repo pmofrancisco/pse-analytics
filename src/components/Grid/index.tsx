@@ -1,6 +1,6 @@
 import React, { ReactNode, ReactNodeArray } from 'react';
 import styled from 'styled-components';
-import { Cell } from './Cell';
+import Cell from './Cell';
 import { Header, HeaderItem } from './Header';
 import LoadingIndicator from './LoadingIndicator';
 import Row from './Row';
